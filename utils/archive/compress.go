@@ -1,16 +1,4 @@
 // Copyright © 2021 Alibaba Group Holding Ltd.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 package archive
 
@@ -68,6 +56,9 @@ func Untar(src io.Reader, dst string) (int64, error) {
 func GzipCompress(in io.Reader) (io.ReadCloser, chan struct{}) {
 	compressionDone := make(chan struct{})
 
+	/**
+	io.Pipe实现了一对多、多对多、多对一的内存数据通道功能
+	**/
 	pipeReader, pipeWriter := io.Pipe()
 	// Use a bufio.Writer to avoid excessive chunking in HTTP request.
 	bufWriter := bufio.NewWriterSize(pipeWriter, compressionBufSize)

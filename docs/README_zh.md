@@ -20,6 +20,11 @@ sealer run kubernetes:v1.19.9 # 在公有云上运行一个kubernetes集群
 sealer run kubernetes:v1.19.9 --masters 3 --nodes 3 # 在公有云上运行指定数量节点的kuberentes集群
 # 安装到已经存在的机器上
 sealer run kubernetes:v1.19.9 --masters 192.168.0.2,192.168.0.3,192.168.0.4 --nodes 192.168.0.5,192.168.0.6,192.168.0.7 --passwd xxx
+
+sealer run kubernetes:v1.19.9 --masters 192.168.101.102 --nodes 192.168.101.102 --passwd cubeer
+sealer run k3s:v1.18.3 --masters 192.168.101.102 --nodes 192.168.101.102 --passwd cubeer
+sealer run dashboard:v1.19.9 --masters 192.168.101.102 --nodes 192.168.101.102 --passwd cubeer
+dashboard
 ```
 
 > 安装prometheus集群
@@ -275,3 +280,7 @@ sealer tag my-kuberentes-cluster-with-dashboard:latest registry.cn-qingdao.aliyu
 sealer push registry.cn-qingdao.aliyuncs.com/sealer-io/my-kuberentes-cluster-with-dashboard:latest
 ```
 就可以把镜像复用给别人进行使用
+
+
+
+======================================================

@@ -1,16 +1,4 @@
 // Copyright © 2021 Alibaba Group Holding Ltd.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 // +build linux
 
@@ -92,6 +80,7 @@ func (o *Overlay2) Unmount(target string) error {
 	return unmount(target, 0)
 }
 
+//主要是syscall.Mount这个系统调用，参数基本和命令行一一对应
 func mount(device, target, mType string, flag uintptr, data string) error {
 	if err := syscall.Mount(device, target, mType, flag, data); err != nil {
 		return err

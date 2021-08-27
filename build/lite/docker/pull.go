@@ -1,16 +1,4 @@
 // Copyright © 2021 Alibaba Group Holding Ltd.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 package docker
 
@@ -47,18 +35,7 @@ func (d Docker) ImagesPull(images []string) {
 	}
 }
 
-func (d Docker) ImagesPullByImageListFile(fileName string) {
-	data, err := utils.ReadLines(fileName)
-	if err != nil {
-		logger.Error(fmt.Sprintf("Read image list failed: %v", err))
-	}
-	d.ImagesPull(data)
-}
-
-func (d Docker) ImagesPullByList(images []string) {
-	d.ImagesPull(images)
-}
-
+// ImagePull函数重载，，核心还是调用"github.com/docker/docker/client"的ImagePull
 func (d Docker) ImagePull(image string) error {
 	var ImagePullOptions types.ImagePullOptions
 	ctx := context.Background()
@@ -66,6 +43,8 @@ func (d Docker) ImagePull(image string) error {
 	if err != nil {
 		return err
 	}
+
+	//获取docker授权
 	if d.Username != "" && d.Password != "" {
 		authConfig := types.AuthConfig{
 			Username: d.Username,
@@ -86,9 +65,24 @@ func (d Docker) ImagePull(image string) error {
 	defer func() {
 		_ = out.Close()
 	}()
+
 	err = dockerjsonmessage.DisplayJSONMessagesToStream(out, dockerstreams.NewOut(common.StdOut), nil)
 	if err != nil && err != io.ErrClosedPipe {
 		logger.Warn("error occurs in display progressing, err: %s", err)
 	}
 	return nil
 }
+
+
+func (d Docker) ImagesPullByImageListFile(fileName string) {
+	data, err := utils.ReadLines(fileName)
+	if err != nil {
+		logger.Error(fmt.Sprintf("Read image list failed: %v", err))
+	}
+	d.ImagesPull(data)
+}
+
+func (d Docker) ImagesPullByList(images []string) {
+	d.ImagesPull(images)
+}
+

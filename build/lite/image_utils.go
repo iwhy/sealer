@@ -8,6 +8,7 @@ import (
 )
 
 // decode image from yaml content
+// 这里的yaml实际上就是一个image清单，，参考image_utils_test.go第9行
 func DecodeImages(body string) []string {
 	var list []string
 
