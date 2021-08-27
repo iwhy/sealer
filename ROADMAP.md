@@ -53,15 +53,16 @@
 
 **yingfan  2021/8/27**
 就目前来讲，sealer还有很多不完善的功能
-，但是已经具备基础核心的一键部署功能：  
->做成套件：
-
+，但是已经具备基础核心的一键部署功能： 
 - 一键安装，尝试版，免费， 只有k8s和dashboard，，
-- 一键安装 istio，基础版，完整版
-- 一键安装devops战
-- 一键安装监控 ETL，promethus，grafana等等
-- 一键安装 MQ
-- 一键安装 redis，mysql
+
+>做成套件：
+>
+- [ ]  一键安装 istio，基础版，完整版
+- [ ]  一键安装devops战
+- [ ]  一键安装监控 ETL，promethus，grafana等等
+- [ ]  一键安装 MQ
+- [ ]  一键安装 redis，mysql
 
 
 
